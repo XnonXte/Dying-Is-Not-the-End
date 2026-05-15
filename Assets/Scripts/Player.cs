@@ -1,58 +1,152 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public float walkingSpeed = 8;
-    public float jumpForce = 4;
+    [Header("Movement")]
+    public float walkingSpeed = 8f;
+    public float jumpForce = 7f;
+
+    [Header("Ground")]
     public Transform groundCheck;
     public LayerMask groundLayer;
-    private Rigidbody2D player;
+
+    [Header("Loop")]
+    public float loopDuration = 20f;
+    public Transform spawnPoint;
+
+    [Header("Clone")]
+    public GameObject clonePrefab;
+    public int maxClone = 2;
+
+    private Rigidbody2D rb;
+
     private bool isGrounded;
-    private float groundCheckRadius = 0.2f;
+
+    private float timer;
+
+    private Queue<GameObject> clones =
+        new Queue<GameObject>();
+
+    private List<FrameData> recordedFrames =
+        new List<FrameData>();
 
     void Start()
     {
-        player = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+
+        timer = loopDuration;
     }
 
-    void Update()
+   void Update()
     {
-        float moveInput = 0;
-        if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed) moveInput += 1;
-        if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed) moveInput -= 1;
+        timer -= Time.deltaTime;
 
-        player.linearVelocity = new Vector2(moveInput * walkingSpeed, player.linearVelocityY);
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        // PENCET Q = LOOP LANGSUNG
+        if (Keyboard.current.qKey.wasPressedThisFrame)
         {
-            if (isGrounded)
-            {
-                Jump();
-            }
+            TimeLoop();
         }
+
+        // TIMER HABIS
+        if (timer <= 0)
+        {
+            TimeLoop();
+        }
+
+        Move();
+
+        // RECORD POSITION
+        recordedFrames.Add(
+            new FrameData(transform.position)
+        );
     }
 
-    void Jump()
+    void Move()
     {
-        player.linearVelocity = new Vector2(player.linearVelocityX, jumpForce);
+        float horizontal = 0;
 
+        if (Keyboard.current.aKey.isPressed ||
+            Keyboard.current.leftArrowKey.isPressed)
+        {
+            horizontal = -1;
+        }
+
+        if (Keyboard.current.dKey.isPressed ||
+            Keyboard.current.rightArrowKey.isPressed)
+        {
+            horizontal = 1;
+        }
+
+        rb.linearVelocity =
+            new Vector2(
+                horizontal * walkingSpeed,
+                rb.linearVelocity.y
+            );
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame
+            && isGrounded)
+        {
+            rb.linearVelocity =
+                new Vector2(
+                    rb.linearVelocity.x,
+                    jumpForce
+                );
+        }
     }
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded =
+            Physics2D.OverlapCircle(
+                groundCheck.position,
+                0.2f,
+                groundLayer
+            );
     }
 
-    void Die()
+    void TimeLoop()
     {
-        Destroy(gameObject);
+        // SPAWN CLONE
+        GameObject clone =
+            Instantiate(
+                clonePrefab,
+                spawnPoint.position,
+                Quaternion.identity
+            );
+
+        CloneReplay replay =
+            clone.GetComponent<CloneReplay>();
+
+        replay.frames =
+            new List<FrameData>(recordedFrames);
+
+        clones.Enqueue(clone);
+
+        // LIMIT CLONE
+        if (clones.Count > maxClone)
+        {
+            Destroy(clones.Dequeue());
+        }
+
+        // RESET PLAYER
+        transform.position = spawnPoint.position;
+
+        rb.linearVelocity = Vector2.zero;
+
+        // RESET RECORD
+        recordedFrames.Clear();
+
+        // RESET TIMER
+        timer = loopDuration;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Damange")
+        if (collision.gameObject.CompareTag("Damage"))
         {
-            Die();
+            TimeLoop();
         }
     }
 }
