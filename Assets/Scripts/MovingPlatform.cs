@@ -10,9 +10,9 @@ public class MovingPlatform : MonoBehaviour
     public float moveSpeed = 3f;
     public bool autoMove = true;
 
-    [Header("Pressure Plate (Optional)")]
+    [Header("Trigger to move (Optional)")]
     public PressurePlate pressurePlate;
-
+    public PedestalButton pedestalButton;
     private Rigidbody2D platform;
     private Vector3 targetPosition;
     private bool movingToPoint2 = true;
@@ -31,9 +31,15 @@ public class MovingPlatform : MonoBehaviour
     {
         // Check if platform should be moving
         bool shouldMove = autoMove;
+
         if (pressurePlate != null)
         {
             shouldMove = pressurePlate.isPressed;
+        }
+
+        if (pedestalButton != null)
+        {
+            shouldMove = pedestalButton.isPressed;
         }
 
         if (shouldMove && Point1 != null && Point2 != null)

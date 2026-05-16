@@ -4,9 +4,11 @@ using UnityEngine;
 public class FrameData
 {
     public Vector3 position;
+    public bool isInteracting;
 
-    public FrameData(Vector3 pos)
+    public FrameData(Vector3 pos, bool interacting = false)
     {
         position = pos;
+        isInteracting = interacting;
     }
 }

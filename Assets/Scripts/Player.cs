@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
     public float walkingSpeed = 8f;
-    public float jumpForce = 7f;
+    public float jumpForce = 12f;
 
     [Header("Ground")]
     public Transform groundCheck;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("Loop")]
     public float loopDuration = 20f;
+    public TextMeshProUGUI timerDisplay;
 
     [Header("Clone")]
     public GameObject clonePrefab;
@@ -24,8 +26,10 @@ public class Player : MonoBehaviour
     private bool isGrounded;
 
     private float timer;
+    private bool timerStarted = false;
 
     private MovingPlatform[] movingPlatforms;
+    private PedestalButton[] pedestalButtons;
 
     private Queue<GameObject> clones =
         new Queue<GameObject>();
@@ -38,31 +42,43 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         movingPlatforms = FindObjectsByType<MovingPlatform>();
+        pedestalButtons = FindObjectsByType<PedestalButton>();
         timer = loopDuration;
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
+        // Only count down timer if it has started
+        if (timerStarted)
+        {
+            timer -= Time.deltaTime;
+        }
 
-        // Press Q = TimeLoop() if isGrounded
-        if (Keyboard.current.qKey.wasPressedThisFrame && isGrounded)
+        // Update timer display
+        if (timerDisplay != null)
+        {
+            timerDisplay.text = "Self Destruct: " + Mathf.Max(0, (int)timer);
+        }
+
+        // Press R = Respawn if grounded and movement was made
+        if (Keyboard.current.rKey.wasPressedThisFrame && isGrounded && timerStarted)
         {
             TimeLoop();
         }
 
-        // Timer ends and isGrounded
-        if (timer <= 0 && isGrounded)
+        // Timer ends and isGroundee
+        if (timer <= 0 && isGrounded && timerStarted)
         {
             TimeLoop();
         }
 
         Move();
 
-        // Record position
+        // Record position and interaction
+        bool isPressingE = Keyboard.current.eKey.isPressed;
         recordedFrames.Add(
-            new FrameData(transform.position)
+            new FrameData(transform.position, isPressingE)
         );
     }
 
@@ -74,12 +90,14 @@ public class Player : MonoBehaviour
             Keyboard.current.leftArrowKey.isPressed)
         {
             horizontal = -1;
+            timerStarted = true; // Start timer on movement
         }
 
         if (Keyboard.current.dKey.isPressed ||
             Keyboard.current.rightArrowKey.isPressed)
         {
             horizontal = 1;
+            timerStarted = true; // Start timer on movement
         }
 
         rb.linearVelocity =
@@ -96,6 +114,7 @@ public class Player : MonoBehaviour
                     rb.linearVelocity.x,
                     jumpForce
                 );
+            timerStarted = true; // Start timer on jump
         }
     }
 
@@ -144,11 +163,18 @@ public class Player : MonoBehaviour
             platform.ResetToPoint1();
         }
 
+        // Reset all pedestal buttons
+        foreach (PedestalButton button in pedestalButtons)
+        {
+            button.Unpress();
+        }
+
         // Reset recording
         recordedFrames.Clear();
 
         // Reset timer
         timer = loopDuration;
+        timerStarted = false; // Stop timer until next movement
     }
 
     void OnCollisionEnter2D(Collision2D collision)
