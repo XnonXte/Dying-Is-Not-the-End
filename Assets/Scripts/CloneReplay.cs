@@ -31,9 +31,10 @@ public class CloneReplay : MonoBehaviour
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;
-                col.isTrigger = false;
-                rb.bodyType = RigidbodyType2D.Static;
+                rb.bodyType = RigidbodyType2D.Kinematic;
             }
+
+            col.isTrigger = false;
 
             return;
         }
