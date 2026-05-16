@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Dying Is Not the End.slnx",
+    "dotnet.defaultSolution": "Dying-Is-Not-the-End.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }

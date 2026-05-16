@@ -39,8 +39,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        movingPlatforms = FindObjectsByType<MovingPlatform>(FindObjectsSortMode.None);
-        pedestalButtons = FindObjectsByType<PedestalButton>(FindObjectsSortMode.None);
+        movingPlatforms = FindObjectsByType<MovingPlatform>();
+        pedestalButtons = FindObjectsByType<PedestalButton>();
 
         timer = loopDuration;
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
