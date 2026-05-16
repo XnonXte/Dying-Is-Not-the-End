@@ -148,5 +148,7 @@ public class Player : MonoBehaviour
         {
             TimeLoop();
         }
+
+        
     }
 }
