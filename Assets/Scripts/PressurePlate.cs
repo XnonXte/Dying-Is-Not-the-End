@@ -7,6 +7,7 @@ public class PressurePlate : MonoBehaviour
     public float pressDistance = 0.3f;
     public float moveSpeed = 5f;
     public string playerTag = "Player";
+    public string cloneTag = "Clone";
 
     private Rigidbody2D plate;
     private Vector3 initialPosition;
@@ -51,7 +52,7 @@ public class PressurePlate : MonoBehaviour
         // Check if any are the player
         foreach (Collider2D collider in overlaps)
         {
-            if (collider.CompareTag(playerTag))
+            if (collider.CompareTag(playerTag) || collider.CompareTag(cloneTag))
             {
                 return true;
             }
