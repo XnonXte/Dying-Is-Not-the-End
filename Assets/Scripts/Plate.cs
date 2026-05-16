@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PressurePlate : MonoBehaviour
+public class Plate : MonoBehaviour
 {
     [Header("Pressure Plate Settings")]
     public Collider2D plateTrigger;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class Platform : MonoBehaviour
 {
     [Header("Movement Points")]
     public Transform Point1;
@@ -11,8 +11,8 @@ public class MovingPlatform : MonoBehaviour
     public bool autoMove = true;
 
     [Header("Trigger to move (Optional)")]
-    public PressurePlate pressurePlate;
-    public PedestalButton pedestalButton;
+    public Plate pressurePlate;
+    public Button pedestalButton;
     private Rigidbody2D platform;
     private Vector3 targetPosition;
     private bool movingToPoint2 = true;

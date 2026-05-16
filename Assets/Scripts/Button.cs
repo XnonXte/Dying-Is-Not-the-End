@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PedestalButton : MonoBehaviour
+public class Button : MonoBehaviour
 {
     [Header("Button Settings")]
     public BoxCollider2D pressTrigger;

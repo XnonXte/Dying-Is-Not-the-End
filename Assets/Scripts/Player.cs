@@ -20,16 +20,17 @@ public class Player : MonoBehaviour
     [Header("Clone")]
     public GameObject clonePrefab;
     public int maxClone = 2;
+    public TextMeshProUGUI cloneDisplay;   // <-- NEW
 
     private Rigidbody2D rb;
     private bool isGrounded;
     private float timer;
     private bool timerStarted = false;
 
-    private bool hasSpawnedFirstClone = false;     // ← New
+    private bool hasSpawnedFirstClone = false;
 
-    private MovingPlatform[] movingPlatforms;
-    private PedestalButton[] pedestalButtons;
+    private Platform[] movingPlatforms;
+    private Button[] pedestalButtons;
 
     private Queue<GameObject> clones = new Queue<GameObject>();
     private List<FrameData> recordedFrames = new List<FrameData>();
@@ -39,13 +40,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        movingPlatforms = FindObjectsByType<MovingPlatform>();
-        pedestalButtons = FindObjectsByType<PedestalButton>();
+        movingPlatforms = FindObjectsByType<Platform>();
+        pedestalButtons = FindObjectsByType<Button>();
 
         timer = loopDuration;
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
 
-        // Auto-start timer if this is a new loop after first clone
         if (hasSpawnedFirstClone)
         {
             timerStarted = true;
@@ -64,6 +64,12 @@ public class Player : MonoBehaviour
             timerDisplay.text = "Self Destruct: " + Mathf.Max(0, (int)timer);
         }
 
+        // === Clone Display (clone count / clone limit) ===
+        if (cloneDisplay != null)
+        {
+            cloneDisplay.text = clones.Count + " / " + maxClone;
+        }
+
         if (Keyboard.current.rKey.wasPressedThisFrame && isGrounded && timerStarted)
         {
             TimeLoop();
@@ -76,7 +82,6 @@ public class Player : MonoBehaviour
 
         Move();
 
-        // Record only after timer started
         if (timerStarted)
         {
             bool isPressingE = Keyboard.current.eKey.isPressed;
@@ -121,7 +126,6 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // Spawn clone
         GameObject clone = Instantiate(clonePrefab, spawnPoint.position, Quaternion.identity);
         CloneReplay replay = clone.GetComponent<CloneReplay>();
         replay.frames = new List<FrameData>(recordedFrames);
@@ -133,7 +137,6 @@ public class Player : MonoBehaviour
             Destroy(clones.Dequeue());
         }
 
-        // === Mark that first clone has been spawned ===
         hasSpawnedFirstClone = true;
 
         ResetPlayerState();
@@ -144,12 +147,12 @@ public class Player : MonoBehaviour
         transform.position = spawnPoint.position;
         rb.linearVelocity = Vector2.zero;
 
-        foreach (MovingPlatform platform in movingPlatforms)
+        foreach (Platform platform in movingPlatforms)
         {
             platform.ResetToPoint1();
         }
 
-        foreach (PedestalButton button in pedestalButtons)
+        foreach (Button button in pedestalButtons)
         {
             button.Unpress();
         }
@@ -157,13 +160,10 @@ public class Player : MonoBehaviour
         recordedFrames.Clear();
         timer = loopDuration;
 
-        // Do NOT reset timerStarted here if first clone was spawned
-        // (It will be set to true in Start() for the new player)
         if (!hasSpawnedFirstClone)
         {
             timerStarted = false;
         }
-        // else: timerStarted remains true (auto-start)
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -43,7 +43,7 @@ public class CloneReplay : MonoBehaviour
         if (frames[currentFrame].isInteracting)
         {
             // Try to find and press a button at this location
-            PedestalButton button = FindButtonInTrigger();
+            Button button = FindButtonInTrigger();
             if (button != null && !button.isPressed)
             {
                 // Simulate button press by directly triggering it
@@ -54,14 +54,14 @@ public class CloneReplay : MonoBehaviour
         currentFrame++;
     }
 
-    private PedestalButton FindButtonInTrigger()
+    private Button FindButtonInTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
         foreach (Collider2D collider in colliders)
         {
             if (collider.isTrigger)
             {
-                PedestalButton button = collider.GetComponent<PedestalButton>();
+                Button button = collider.GetComponent<Button>();
                 if (button != null)
                 {
                     return button;

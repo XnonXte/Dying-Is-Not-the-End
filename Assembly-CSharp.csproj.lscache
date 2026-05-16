@@ -51,12 +51,14 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 
 [sourceFiles]
 Assets/Scripts/
+ Button.cs
  CloneReplay.cs
+ Door.cs
+ Exit.cs
  FrameData.cs
- MovingPlatform.cs
- PedestalButton.cs
+ Plate.cs
+ Platform.cs
  Player.cs
- PressurePlate.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
