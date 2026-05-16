@@ -22,52 +22,53 @@ public class Player : MonoBehaviour
     public int maxClone = 2;
 
     private Rigidbody2D rb;
-
     private bool isGrounded;
-
     private float timer;
     private bool timerStarted = false;
+
+    private bool hasSpawnedFirstClone = false;     // ← New
 
     private MovingPlatform[] movingPlatforms;
     private PedestalButton[] pedestalButtons;
 
-    private Queue<GameObject> clones =
-        new Queue<GameObject>();
+    private Queue<GameObject> clones = new Queue<GameObject>();
+    private List<FrameData> recordedFrames = new List<FrameData>();
 
-    private List<FrameData> recordedFrames =
-        new List<FrameData>();
     private Transform spawnPoint;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        movingPlatforms = FindObjectsByType<MovingPlatform>();
-        pedestalButtons = FindObjectsByType<PedestalButton>();
+        movingPlatforms = FindObjectsByType<MovingPlatform>(FindObjectsSortMode.None);
+        pedestalButtons = FindObjectsByType<PedestalButton>(FindObjectsSortMode.None);
+
         timer = loopDuration;
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
+
+        // Auto-start timer if this is a new loop after first clone
+        if (hasSpawnedFirstClone)
+        {
+            timerStarted = true;
+        }
     }
 
     void Update()
     {
-        // Only count down timer if it has started
         if (timerStarted)
         {
             timer -= Time.deltaTime;
         }
 
-        // Update timer display
         if (timerDisplay != null)
         {
             timerDisplay.text = "Self Destruct: " + Mathf.Max(0, (int)timer);
         }
 
-        // Press R = Respawn if grounded and movement was made
         if (Keyboard.current.rKey.wasPressedThisFrame && isGrounded && timerStarted)
         {
             TimeLoop();
         }
 
-        // Timer ends and isGroundee
         if (timer <= 0 && isGrounded && timerStarted)
         {
             TimeLoop();
@@ -75,106 +76,94 @@ public class Player : MonoBehaviour
 
         Move();
 
-        // Record position and interaction
-        bool isPressingE = Keyboard.current.eKey.isPressed;
-        recordedFrames.Add(
-            new FrameData(transform.position, isPressingE)
-        );
+        // Record only after timer started
+        if (timerStarted)
+        {
+            bool isPressingE = Keyboard.current.eKey.isPressed;
+            recordedFrames.Add(new FrameData(transform.position, isPressingE));
+        }
     }
 
     void Move()
     {
         float horizontal = 0;
 
-        if (Keyboard.current.aKey.isPressed ||
-            Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
         {
             horizontal = -1;
-            timerStarted = true; // Start timer on movement
+            timerStarted = true;
         }
-
-        if (Keyboard.current.dKey.isPressed ||
-            Keyboard.current.rightArrowKey.isPressed)
+        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
             horizontal = 1;
-            timerStarted = true; // Start timer on movement
+            timerStarted = true;
         }
 
-        rb.linearVelocity =
-            new Vector2(
-                horizontal * walkingSpeed,
-                rb.linearVelocity.y
-            );
+        rb.linearVelocity = new Vector2(horizontal * walkingSpeed, rb.linearVelocity.y);
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame
-            && isGrounded)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
-            rb.linearVelocity =
-                new Vector2(
-                    rb.linearVelocity.x,
-                    jumpForce
-                );
-            timerStarted = true; // Start timer on jump
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            timerStarted = true;
         }
     }
 
     void FixedUpdate()
     {
-        isGrounded =
-            Physics2D.OverlapCircle(
-                groundCheck.position,
-                0.2f,
-                groundLayer
-            );
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     void TimeLoop()
     {
+        if (!timerStarted || recordedFrames.Count == 0)
+        {
+            ResetPlayerState();
+            return;
+        }
+
         // Spawn clone
-        GameObject clone =
-            Instantiate(
-                clonePrefab,
-                spawnPoint.position,
-                Quaternion.identity
-            );
-
-        CloneReplay replay =
-            clone.GetComponent<CloneReplay>();
-
-        replay.frames =
-            new List<FrameData>(recordedFrames);
+        GameObject clone = Instantiate(clonePrefab, spawnPoint.position, Quaternion.identity);
+        CloneReplay replay = clone.GetComponent<CloneReplay>();
+        replay.frames = new List<FrameData>(recordedFrames);
 
         clones.Enqueue(clone);
 
-        // Limit clone
         if (clones.Count > maxClone)
         {
             Destroy(clones.Dequeue());
         }
 
-        // Reset player
-        transform.position = spawnPoint.position;
+        // === Mark that first clone has been spawned ===
+        hasSpawnedFirstClone = true;
 
+        ResetPlayerState();
+    }
+
+    private void ResetPlayerState()
+    {
+        transform.position = spawnPoint.position;
         rb.linearVelocity = Vector2.zero;
 
-        // Reset all moving platforms
         foreach (MovingPlatform platform in movingPlatforms)
         {
             platform.ResetToPoint1();
         }
 
-        // Reset all pedestal buttons
         foreach (PedestalButton button in pedestalButtons)
         {
             button.Unpress();
         }
 
-        // Reset recording
         recordedFrames.Clear();
-
-        // Reset timer
         timer = loopDuration;
-        timerStarted = false; // Stop timer until next movement
+
+        // Do NOT reset timerStarted here if first clone was spawned
+        // (It will be set to true in Start() for the new player)
+        if (!hasSpawnedFirstClone)
+        {
+            timerStarted = false;
+        }
+        // else: timerStarted remains true (auto-start)
     }
 
     void OnCollisionEnter2D(Collision2D collision)
