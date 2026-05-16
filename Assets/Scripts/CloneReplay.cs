@@ -4,42 +4,41 @@ using UnityEngine;
 public class CloneReplay : MonoBehaviour
 {
     public List<FrameData> frames;
-
     private int currentFrame;
-
     private Rigidbody2D rb;
-
+    private CapsuleCollider2D col;
     private bool finished;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
         if (frames == null) return;
 
-        // SUDAH SELESAI
+        // Already Finished 
         if (finished) return;
 
-        // AKHIR REPLAY
+        // End of replay
         if (currentFrame >= frames.Count)
         {
             finished = true;
 
-            // FREEZE TOTAL
+            // Total freeze
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;
-
+                col.isTrigger = false;
                 rb.bodyType = RigidbodyType2D.Static;
             }
 
             return;
         }
 
-        // REPLAY POSITION
+        // Replay position
         transform.position =
             frames[currentFrame].position;
 

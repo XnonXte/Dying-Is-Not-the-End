@@ -86,4 +86,15 @@ public class MovingPlatform : MonoBehaviour
             collision.transform.SetParent(null);
         }
     }
+
+    public void ResetToPoint1()
+    {
+        if (Point1 != null)
+        {
+            transform.position = Point1.position;
+            platform.position = Point1.position;
+            targetPosition = Point2.position;
+            movingToPoint2 = true;
+        }
+    }
 }

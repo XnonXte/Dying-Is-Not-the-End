@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
 
     [Header("Loop")]
     public float loopDuration = 20f;
-    public Transform spawnPoint;
 
     [Header("Clone")]
     public GameObject clonePrefab;
@@ -26,38 +25,42 @@ public class Player : MonoBehaviour
 
     private float timer;
 
+    private MovingPlatform[] movingPlatforms;
+
     private Queue<GameObject> clones =
         new Queue<GameObject>();
 
     private List<FrameData> recordedFrames =
         new List<FrameData>();
+    private Transform spawnPoint;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        movingPlatforms = FindObjectsByType<MovingPlatform>();
         timer = loopDuration;
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
     }
 
-   void Update()
+    void Update()
     {
         timer -= Time.deltaTime;
 
-        // PENCET Q = LOOP LANGSUNG
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        // Press Q = TimeLoop() if isGrounded
+        if (Keyboard.current.qKey.wasPressedThisFrame && isGrounded)
         {
             TimeLoop();
         }
 
-        // TIMER HABIS
-        if (timer <= 0)
+        // Timer ends and isGrounded
+        if (timer <= 0 && isGrounded)
         {
             TimeLoop();
         }
 
         Move();
 
-        // RECORD POSITION
+        // Record position
         recordedFrames.Add(
             new FrameData(transform.position)
         );
@@ -108,7 +111,7 @@ public class Player : MonoBehaviour
 
     void TimeLoop()
     {
-        // SPAWN CLONE
+        // Spawn clone
         GameObject clone =
             Instantiate(
                 clonePrefab,
@@ -124,21 +127,27 @@ public class Player : MonoBehaviour
 
         clones.Enqueue(clone);
 
-        // LIMIT CLONE
+        // Limit clone
         if (clones.Count > maxClone)
         {
             Destroy(clones.Dequeue());
         }
 
-        // RESET PLAYER
+        // Reset player
         transform.position = spawnPoint.position;
 
         rb.linearVelocity = Vector2.zero;
 
-        // RESET RECORD
+        // Reset all moving platforms
+        foreach (MovingPlatform platform in movingPlatforms)
+        {
+            platform.ResetToPoint1();
+        }
+
+        // Reset recording
         recordedFrames.Clear();
 
-        // RESET TIMER
+        // Reset timer
         timer = loopDuration;
     }
 
