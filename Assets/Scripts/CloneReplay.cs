@@ -6,13 +6,11 @@ public class CloneReplay : MonoBehaviour
     public List<FrameData> frames;
     private int currentFrame;
     private Rigidbody2D rb;
-    private CapsuleCollider2D col;
     private bool finished;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -33,8 +31,6 @@ public class CloneReplay : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
                 rb.bodyType = RigidbodyType2D.Kinematic;
             }
-
-            col.isTrigger = false;
 
             return;
         }
