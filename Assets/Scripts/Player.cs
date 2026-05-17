@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     private List<FrameData> recordedFrames = new List<FrameData>();
 
     private Transform spawnPoint;
-
+    private Laser laser;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -116,15 +116,17 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
+        if (timerStarted)
+        {
+            bool isPressingE = Keyboard.current.eKey.isPressed;
+            recordedFrames.Add(new FrameData(transform.position, isPressingE));
+        }
     }
 
-    void TimeLoop()
+    public void TimeLoop()
     {
-        if (!timerStarted || recordedFrames.Count == 0)
-        {
-            ResetPlayerState();
-            return;
-        }
+      
 
         GameObject clone = Instantiate(clonePrefab, spawnPoint.position, Quaternion.identity);
         CloneReplay replay = clone.GetComponent<CloneReplay>();
@@ -168,8 +170,9 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Damage"))
+        if (collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("Laser"))
         {
+            Debug.Log("palyer mati");
             TimeLoop();
         }
     }

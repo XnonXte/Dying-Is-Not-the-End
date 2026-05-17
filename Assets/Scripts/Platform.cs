@@ -13,6 +13,8 @@ public class Platform : MonoBehaviour
     [Header("Trigger to move (Optional)")]
     public Plate[] pressurePlates;
     public Button[] pedestalButtons;
+
+    public LaserReceiver[] laserReceivers; // NEW: Array of laser receivers that can trigger the platform
     private Rigidbody2D platform;
     private Vector3 targetPosition;
     private bool movingToPoint2 = true;
@@ -34,12 +36,13 @@ public class Platform : MonoBehaviour
 
         bool platesSet = pressurePlates != null && pressurePlates.Length > 0;
         bool buttonsSet = pedestalButtons != null && pedestalButtons.Length > 0;
-
-        if (platesSet || buttonsSet)
+        bool lasersSet = laserReceivers != null && laserReceivers.Length > 0;   
+        if (platesSet || buttonsSet || lasersSet)
         {
             bool platesPressed = AllPlatesPressed(pressurePlates);
             bool buttonsPressed = AllButtonsPressed(pedestalButtons);
-            shouldMove = platesPressed || buttonsPressed;
+            bool lasersActive = AllLasersActive(laserReceivers);
+            shouldMove = platesPressed || buttonsPressed || lasersActive;
         }
 
         if (shouldMove && Point1 != null && Point2 != null)
@@ -65,6 +68,15 @@ public class Platform : MonoBehaviour
         foreach (Button b in buttons)
         {
             if (b == null || !b.isPressed) return false;
+        }
+        return true;
+    }
+    bool AllLasersActive(LaserReceiver[] receivers)
+    {
+        if (receivers == null || receivers.Length == 0) return false;
+        foreach (LaserReceiver r in receivers)
+        {
+            if (r == null || !r.isPowered) return false;
         }
         return true;
     }

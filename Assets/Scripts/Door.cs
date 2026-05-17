@@ -4,6 +4,7 @@ public class Door : MonoBehaviour
 {
     public Plate[] pressurePlates;
     public Button[] pedestalButtons;
+    public LaserReceiver[] laserReceivers; // NEW: Array of laser receivers that can trigger the door
     public Transform doorUp;
     public Transform doorDown;
     private Rigidbody2D door;
@@ -30,8 +31,9 @@ public class Door : MonoBehaviour
         Vector2 target = door.position;
             bool platesOpen = AllPlatesPressed(pressurePlates);
             bool buttonsOpen = AllButtonsPressed(pedestalButtons);
+            bool lasersOpen = AllLasersActive(laserReceivers);
 
-            if (platesOpen || buttonsOpen)
+            if (platesOpen || buttonsOpen || lasersOpen)
             {
                 if (doorUp != null)
                     target = (Vector2)doorUp.position;
@@ -60,6 +62,15 @@ public class Door : MonoBehaviour
             foreach (Button b in buttons)
             {
                 if (b == null || !b.isPressed) return false;
+            }
+            return true;
+        }
+        bool AllLasersActive(LaserReceiver[] receivers)
+        {
+            if (receivers == null || receivers.Length == 0) return false;
+            foreach (LaserReceiver r in receivers)
+            {
+                if (r == null || !r.isPowered) return false;
             }
             return true;
         }
