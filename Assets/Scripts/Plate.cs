@@ -8,6 +8,7 @@ public class Plate : MonoBehaviour
     public float moveSpeed = 5f;
     public string playerTag = "Player";
     public string cloneTag = "Clone";
+     public string boxTag = "Box";
 
     private Rigidbody2D plate;
     private Vector3 initialPosition;
@@ -52,7 +53,7 @@ public class Plate : MonoBehaviour
         // Check if any are the player
         foreach (Collider2D collider in overlaps)
         {
-            if (collider.CompareTag(playerTag) || collider.CompareTag(cloneTag))
+            if (collider.CompareTag(playerTag) || collider.CompareTag(cloneTag) || collider.CompareTag(boxTag))
             {
                 return true;
             }

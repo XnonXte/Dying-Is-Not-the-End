@@ -10397,6 +10397,18 @@ PrefabInstance:
       propertyPath: pressurePlate
       value: 
       objectReference: {fileID: 2127958131}
+    - target: {fileID: 6401864308873383588, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
+      propertyPath: pressurePlates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401864308873383588, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
+      propertyPath: pedestalButtons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401864308873383588, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
+      propertyPath: 'pressurePlates.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2127958131}
     - target: {fileID: 6668534497920852889, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.11
@@ -10651,6 +10663,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6161295035727417011, guid: fd8c931a9e0ac1c41a03163b2b052c66, type: 3}
       propertyPath: pressurePlate
+      value: 
+      objectReference: {fileID: 1206422692}
+    - target: {fileID: 6161295035727417011, guid: fd8c931a9e0ac1c41a03163b2b052c66, type: 3}
+      propertyPath: pressurePlates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6161295035727417011, guid: fd8c931a9e0ac1c41a03163b2b052c66, type: 3}
+      propertyPath: 'pressurePlates.Array.data[0]'
       value: 
       objectReference: {fileID: 1206422692}
     - target: {fileID: 7762315193706958808, guid: fd8c931a9e0ac1c41a03163b2b052c66, type: 3}

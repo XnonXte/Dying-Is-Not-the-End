@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3227548462509224225}
   - component: {fileID: 5326062030491654022}
-  - component: {fileID: 5432885541322669481}
+  - component: {fileID: 4344102806427397373}
   m_Layer: 3
   m_Name: Base
   m_TagString: Untagged
@@ -92,8 +92,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &5432885541322669481
-BoxCollider2D:
+--- !u!60 &4344102806427397373
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,8 +136,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.75, y: -0.5}
+      - {x: 0.75, y: -0.5}
+      - {x: 0.5, y: 0.5}
+  m_UseDelaunayMesh: 1
 --- !u!1 &1262500870282741547
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +155,7 @@ GameObject:
   - component: {fileID: 5656609513475665093}
   - component: {fileID: 1849641362359279861}
   - component: {fileID: 2379068719284969284}
-  - component: {fileID: 8442584609640718176}
+  - component: {fileID: 2380929998806769846}
   m_Layer: 3
   m_Name: Plate
   m_TagString: Untagged
@@ -276,8 +281,10 @@ MonoBehaviour:
   pressDistance: 0.3
   moveSpeed: 5
   playerTag: Player
---- !u!61 &8442584609640718176
-BoxCollider2D:
+  cloneTag: Clone
+  boxTag: Box
+--- !u!60 &2380929998806769846
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -320,8 +327,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.62957424, y: -0.4619365}
+      - {x: 0.6374432, y: -0.4535942}
+      - {x: 0.5, y: 0.5}
+  m_UseDelaunayMesh: 1
 --- !u!1 &4857060118843034150
 GameObject:
   m_ObjectHideFlags: 0
