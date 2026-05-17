@@ -12088,12 +12088,23 @@ PrefabInstance:
     - target: {fileID: 6161295035727417011, guid: fd8c931a9e0ac1c41a03163b2b052c66, type: 3}
       propertyPath: 'pedestalButtons.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1738912963}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd8c931a9e0ac1c41a03163b2b052c66, type: 3}
+--- !u!114 &1738912963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3531754616663774868, guid: b6357b5984dd88842a15c371345cfca6, type: 3}
+  m_PrefabInstance: {fileID: 1312509013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac249fe45fe8c734ea16a3fe50b13af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Button
 --- !u!1001 &1780008651
 PrefabInstance:
   m_ObjectHideFlags: 0
