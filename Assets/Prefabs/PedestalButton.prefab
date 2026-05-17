@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Button
   pressTrigger: {fileID: 1503042256181533286}
   pressedLength: 5
-  moveDistance: 0.5
+  moveDistance: 0.15
   moveSpeed: 2
 --- !u!61 &1503042256181533286
 BoxCollider2D:
