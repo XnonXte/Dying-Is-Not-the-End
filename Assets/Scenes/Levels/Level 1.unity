@@ -11920,13 +11920,21 @@ PrefabInstance:
       propertyPath: pressurePlate
       value: 
       objectReference: {fileID: 2127958131}
+    - target: {fileID: 6401864308873383588, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
+      propertyPath: pressurePlates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401864308873383588, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
+      propertyPath: 'pressurePlates.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2127958131}
     - target: {fileID: 6668534497920852889, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.11
       objectReference: {fileID: 0}
     - target: {fileID: 6668534497920852889, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.46
+      value: 4.52
       objectReference: {fileID: 0}
     - target: {fileID: 6668534497920852889, guid: fd64e2643ae62fb4ab3636146dd878a4, type: 3}
       propertyPath: m_LocalPosition.z
