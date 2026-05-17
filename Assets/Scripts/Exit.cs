@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
+    public string sceneToLoad;
+
     void Start()
     {
 
@@ -16,7 +19,10 @@ public class Exit : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("PLAYER EXITED");
+            if (sceneToLoad != null)
+            {
+                SceneManager.LoadScene(sceneToLoad);
+            }
         }
     }
 }

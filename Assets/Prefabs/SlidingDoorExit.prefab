@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f20a5729576b54f98b1e4458c268c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Exit
+  sceneToLoad: 
 --- !u!61 &3579846323743659577
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ MonoBehaviour:
   laserReceivers: []
   doorUp: {fileID: 3613511745275950847}
   doorDown: {fileID: 8183812925864285599}
-  speed: 30
+  speed: 5
 --- !u!50 &4717851340300095181
 Rigidbody2D:
   serializedVersion: 5
@@ -367,7 +368,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -30
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1178866486157932684, guid: 26f4942f07fc8994db8e8e4b7a1329fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -458,7 +459,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -30
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2942158114653280129, guid: 26f4942f07fc8994db8e8e4b7a1329fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
