@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [Header("Clone")]
     public GameObject clonePrefab;
     public int maxClone = 2;
-    public TextMeshProUGUI cloneDisplay;   // <-- NEW
+    public TextMeshProUGUI cloneDisplay;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
 
     public void TimeLoop()
     {
-      
+
 
         GameObject clone = Instantiate(clonePrefab, spawnPoint.position, Quaternion.identity);
         CloneReplay replay = clone.GetComponent<CloneReplay>();

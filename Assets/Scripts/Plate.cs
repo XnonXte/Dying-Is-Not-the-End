@@ -8,7 +8,7 @@ public class Plate : MonoBehaviour
     public float moveSpeed = 5f;
     public string playerTag = "Player";
     public string cloneTag = "Clone";
-     public string boxTag = "Box";
+    public string boxTag = "Box";
 
     private Rigidbody2D plate;
     private Vector3 initialPosition;
@@ -24,7 +24,6 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
-        // Check if player is overlapping the trigger
         playerOnPlate = CheckPlayerOnPlate();
 
         // Calculate target position

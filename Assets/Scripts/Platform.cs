@@ -14,7 +14,7 @@ public class Platform : MonoBehaviour
     public Plate[] pressurePlates;
     public Button[] pedestalButtons;
 
-    public LaserReceiver[] laserReceivers; // NEW: Array of laser receivers that can trigger the platform
+    public LaserReceiver[] laserReceivers;
     private Rigidbody2D platform;
     private Vector3 targetPosition;
     private bool movingToPoint2 = true;
@@ -36,7 +36,7 @@ public class Platform : MonoBehaviour
 
         bool platesSet = pressurePlates != null && pressurePlates.Length > 0;
         bool buttonsSet = pedestalButtons != null && pedestalButtons.Length > 0;
-        bool lasersSet = laserReceivers != null && laserReceivers.Length > 0;   
+        bool lasersSet = laserReceivers != null && laserReceivers.Length > 0;
         if (platesSet || buttonsSet || lasersSet)
         {
             bool platesPressed = AllPlatesPressed(pressurePlates);
