@@ -11,8 +11,8 @@ public class Platform : MonoBehaviour
     public bool autoMove = true;
 
     [Header("Trigger to move (Optional)")]
-    public Plate pressurePlate;
-    public Button pedestalButton;
+    public Plate[] pressurePlates;
+    public Button[] pedestalButtons;
     private Rigidbody2D platform;
     private Vector3 targetPosition;
     private bool movingToPoint2 = true;
@@ -32,14 +32,14 @@ public class Platform : MonoBehaviour
         // Check if platform should be moving
         bool shouldMove = autoMove;
 
-        if (pressurePlate != null)
-        {
-            shouldMove = pressurePlate.isPressed;
-        }
+        bool platesSet = pressurePlates != null && pressurePlates.Length > 0;
+        bool buttonsSet = pedestalButtons != null && pedestalButtons.Length > 0;
 
-        if (pedestalButton != null)
+        if (platesSet || buttonsSet)
         {
-            shouldMove = pedestalButton.isPressed;
+            bool platesPressed = AllPlatesPressed(pressurePlates);
+            bool buttonsPressed = AllButtonsPressed(pedestalButtons);
+            shouldMove = platesPressed || buttonsPressed;
         }
 
         if (shouldMove && Point1 != null && Point2 != null)
@@ -47,6 +47,26 @@ public class Platform : MonoBehaviour
             MoveTowardTarget();
             CheckAndToggleTarget();
         }
+    }
+
+    bool AllPlatesPressed(Plate[] plates)
+    {
+        if (plates == null || plates.Length == 0) return false;
+        foreach (Plate p in plates)
+        {
+            if (p == null || !p.isPressed) return false;
+        }
+        return true;
+    }
+
+    bool AllButtonsPressed(Button[] buttons)
+    {
+        if (buttons == null || buttons.Length == 0) return false;
+        foreach (Button b in buttons)
+        {
+            if (b == null || !b.isPressed) return false;
+        }
+        return true;
     }
 
     void MoveTowardTarget()

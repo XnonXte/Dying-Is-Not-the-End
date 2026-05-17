@@ -293,7 +293,7 @@ TextureImporter:
         serializedVersion: 2
         x: 128
         y: 284
-        width: 16
+        width: 33
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -357,9 +357,9 @@ TextureImporter:
       name: level_tileset_11
       rect:
         serializedVersion: 2
-        x: 176
+        x: 161
         y: 284
-        width: 16
+        width: 31
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -379,7 +379,7 @@ TextureImporter:
       name: level_tileset_12
       rect:
         serializedVersion: 2
-        x: 192
+        x: 197
         y: 284
         width: 16
         height: 16
@@ -951,8 +951,8 @@ TextureImporter:
       name: level_tileset_38
       rect:
         serializedVersion: 2
-        x: 96
-        y: 252
+        x: 130
+        y: 284
         width: 16
         height: 16
       alignment: 0

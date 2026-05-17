@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public Plate pressurePlate;
-    public Button pedestalButton;
+    public Plate[] pressurePlates;
+    public Button[] pedestalButtons;
     public Transform doorUp;
     public Transform doorDown;
     private Rigidbody2D door;
@@ -28,23 +28,39 @@ public class Door : MonoBehaviour
 
         // default to current position / doorDown if references are missing
         Vector2 target = door.position;
+            bool platesOpen = AllPlatesPressed(pressurePlates);
+            bool buttonsOpen = AllButtonsPressed(pedestalButtons);
 
-        if (pressurePlate != null && pressurePlate.isPressed)
-        {
-            if (doorUp != null)
-                target = (Vector2)doorUp.position;
-        }
-        else if (pedestalButton != null && pedestalButton.isPressed)
-        {
-            if (doorUp != null)
-                target = (Vector2)doorUp.position;
-        }
-        else
-        {
-            if (doorDown != null)
-                target = (Vector2)doorDown.position;
-        }
-
+            if (platesOpen || buttonsOpen)
+            {
+                if (doorUp != null)
+                    target = (Vector2)doorUp.position;
+            }
+            else
+            {
+                if (doorDown != null)
+                    target = (Vector2)doorDown.position;
+            }
         door.MovePosition(Vector2.MoveTowards(door.position, target, speed * Time.fixedDeltaTime));
     }
+
+        bool AllPlatesPressed(Plate[] plates)
+        {
+            if (plates == null || plates.Length == 0) return false;
+            foreach (Plate p in plates)
+            {
+                if (p == null || !p.isPressed) return false;
+            }
+            return true;
+        }
+
+        bool AllButtonsPressed(Button[] buttons)
+        {
+            if (buttons == null || buttons.Length == 0) return false;
+            foreach (Button b in buttons)
+            {
+                if (b == null || !b.isPressed) return false;
+            }
+            return true;
+        }
 }
