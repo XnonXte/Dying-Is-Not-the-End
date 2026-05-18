@@ -13,12 +13,12 @@ public class LevelButton : MonoBehaviour
     public Sprite completedSprite;   // complete (sudah selesai)
 
     private Image image;
-    private Button button;
+    private UnityEngine.UI.Button button;
 
     void Start()
     {
         image = GetComponent<Image>();
-        button = GetComponent<Button>();
+        button = GetComponent<UnityEngine.UI.Button>();
 
         Refresh();
 
