@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492519929221203860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1076108139871365852}
   - component: {fileID: 6898059838462097757}
   - component: {fileID: 5811874480130804558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1492519929221203860}
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 4626188629257986861, guid: f6be5838d6123a545aa1462a2b03d69a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,8 +145,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   loopDuration: 20
+  timerDisplay: {fileID: 0}
   clonePrefab: {fileID: 6740908766091924767, guid: 1d32924574b71d44aa057be9eaac1c9f, type: 3}
   maxClone: 1
+  cloneDisplay: {fileID: 0}
 --- !u!50 &6898059838462097757
 Rigidbody2D:
   serializedVersion: 5
@@ -163,7 +165,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: de8eac6bd7cec2142a6a5953ea1df62b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -6,13 +6,11 @@ public class CloneReplay : MonoBehaviour
     public List<FrameData> frames;
     private int currentFrame;
     private Rigidbody2D rb;
-    private CapsuleCollider2D col;
     private bool finished;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -34,8 +32,6 @@ public class CloneReplay : MonoBehaviour
                 rb.bodyType = RigidbodyType2D.Kinematic;
             }
 
-            col.isTrigger = false;
-
             return;
         }
 
@@ -43,6 +39,35 @@ public class CloneReplay : MonoBehaviour
         transform.position =
             frames[currentFrame].position;
 
+        // Replay interactions
+        if (frames[currentFrame].isInteracting)
+        {
+            // Try to find and press a button at this location
+            Button button = FindButtonInTrigger();
+            if (button != null && !button.isPressed)
+            {
+                // Simulate button press by directly triggering it
+                button.PressButtonDirect();
+            }
+        }
+
         currentFrame++;
+    }
+
+    private Button FindButtonInTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.isTrigger)
+            {
+                Button button = collider.GetComponent<Button>();
+                if (button != null)
+                {
+                    return button;
+                }
+            }
+        }
+        return null;
     }
 }

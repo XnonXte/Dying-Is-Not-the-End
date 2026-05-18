@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
     public float walkingSpeed = 8f;
-    public float jumpForce = 7f;
+    public float jumpForce = 12f;
 
     [Header("Ground")]
     public Transform groundCheck;
@@ -14,146 +15,162 @@ public class Player : MonoBehaviour
 
     [Header("Loop")]
     public float loopDuration = 20f;
+    public TextMeshProUGUI timerDisplay;
 
     [Header("Clone")]
     public GameObject clonePrefab;
     public int maxClone = 2;
+    public TextMeshProUGUI cloneDisplay;
 
     private Rigidbody2D rb;
-
     private bool isGrounded;
-
     private float timer;
+    private bool timerStarted = false;
 
-    private MovingPlatform[] movingPlatforms;
+    private bool hasSpawnedFirstClone = false;
 
-    private Queue<GameObject> clones =
-        new Queue<GameObject>();
+    private Platform[] movingPlatforms;
+    private Button[] pedestalButtons;
 
-    private List<FrameData> recordedFrames =
-        new List<FrameData>();
+    private Queue<GameObject> clones = new Queue<GameObject>();
+    private List<FrameData> recordedFrames = new List<FrameData>();
+
     private Transform spawnPoint;
-
+    private Laser laser;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        movingPlatforms = FindObjectsByType<MovingPlatform>();
+        movingPlatforms = FindObjectsByType<Platform>();
+        pedestalButtons = FindObjectsByType<Button>();
+
         timer = loopDuration;
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
+
+        if (hasSpawnedFirstClone)
+        {
+            timerStarted = true;
+        }
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
+        if (timerStarted)
+        {
+            timer -= Time.deltaTime;
+        }
 
-        // Press Q = TimeLoop() if isGrounded
-        if (Keyboard.current.qKey.wasPressedThisFrame && isGrounded)
+        if (timerDisplay != null)
+        {
+            timerDisplay.text = "Self Destruct: " + Mathf.Max(0, (int)timer);
+        }
+
+        // === Clone Display (clone count / clone limit) ===
+        if (cloneDisplay != null)
+        {
+            cloneDisplay.text = clones.Count + " / " + maxClone;
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame && isGrounded && timerStarted)
         {
             TimeLoop();
         }
 
-        // Timer ends and isGrounded
-        if (timer <= 0 && isGrounded)
+        if (timer <= 0 && isGrounded && timerStarted)
         {
             TimeLoop();
         }
 
         Move();
 
-        // Record position
-        recordedFrames.Add(
-            new FrameData(transform.position)
-        );
+        if (timerStarted)
+        {
+            bool isPressingE = Keyboard.current.eKey.isPressed;
+            recordedFrames.Add(new FrameData(transform.position, isPressingE));
+        }
     }
 
     void Move()
     {
         float horizontal = 0;
 
-        if (Keyboard.current.aKey.isPressed ||
-            Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
         {
             horizontal = -1;
+            timerStarted = true;
         }
-
-        if (Keyboard.current.dKey.isPressed ||
-            Keyboard.current.rightArrowKey.isPressed)
+        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
             horizontal = 1;
+            timerStarted = true;
         }
 
-        rb.linearVelocity =
-            new Vector2(
-                horizontal * walkingSpeed,
-                rb.linearVelocity.y
-            );
+        rb.linearVelocity = new Vector2(horizontal * walkingSpeed, rb.linearVelocity.y);
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame
-            && isGrounded)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
-            rb.linearVelocity =
-                new Vector2(
-                    rb.linearVelocity.x,
-                    jumpForce
-                );
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            timerStarted = true;
         }
     }
 
     void FixedUpdate()
     {
-        isGrounded =
-            Physics2D.OverlapCircle(
-                groundCheck.position,
-                0.2f,
-                groundLayer
-            );
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+
+        if (timerStarted)
+        {
+            bool isPressingE = Keyboard.current.eKey.isPressed;
+            recordedFrames.Add(new FrameData(transform.position, isPressingE));
+        }
     }
 
-    void TimeLoop()
+    public void TimeLoop()
     {
-        // Spawn clone
-        GameObject clone =
-            Instantiate(
-                clonePrefab,
-                spawnPoint.position,
-                Quaternion.identity
-            );
 
-        CloneReplay replay =
-            clone.GetComponent<CloneReplay>();
 
-        replay.frames =
-            new List<FrameData>(recordedFrames);
+        GameObject clone = Instantiate(clonePrefab, spawnPoint.position, Quaternion.identity);
+        CloneReplay replay = clone.GetComponent<CloneReplay>();
+        replay.frames = new List<FrameData>(recordedFrames);
 
         clones.Enqueue(clone);
 
-        // Limit clone
         if (clones.Count > maxClone)
         {
             Destroy(clones.Dequeue());
         }
 
-        // Reset player
-        transform.position = spawnPoint.position;
+        hasSpawnedFirstClone = true;
 
+        ResetPlayerState();
+    }
+
+    private void ResetPlayerState()
+    {
+        transform.position = spawnPoint.position;
         rb.linearVelocity = Vector2.zero;
 
-        // Reset all moving platforms
-        foreach (MovingPlatform platform in movingPlatforms)
+        foreach (Platform platform in movingPlatforms)
         {
             platform.ResetToPoint1();
         }
 
-        // Reset recording
-        recordedFrames.Clear();
+        foreach (Button button in pedestalButtons)
+        {
+            button.Unpress();
+        }
 
-        // Reset timer
+        recordedFrames.Clear();
         timer = loopDuration;
+
+        if (!hasSpawnedFirstClone)
+        {
+            timerStarted = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Damage"))
+        if (collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("Laser"))
         {
             TimeLoop();
         }

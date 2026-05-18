@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1244637650263110192}
   - component: {fileID: 3642163887818220509}
   - component: {fileID: 693888975533054327}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Clone
   m_TagString: Clone
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.24, y: 4.51, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3724515691253319977}
@@ -83,9 +83,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 970da1cdbefde1d47b9575ea45f91bef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.28235295}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3724515691253319977}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
