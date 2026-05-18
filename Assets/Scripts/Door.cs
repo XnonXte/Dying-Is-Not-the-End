@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public Rigidbody2D door;  
-    public PressurePlate pressurePlate;
+    public Rigidbody2D door;
+    public Plate pressurePlate;
     public Transform doorUp;
     public Transform doorDown;
     [SerializeField] private float speed = 30f;

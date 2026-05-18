@@ -10090,6 +10090,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1748825427910406442, guid: 285822cbdf98cd946b8a22228871daad, type: 3}
+      propertyPath: sceneToLoad
+      value: Level4
+      objectReference: {fileID: 0}
     - target: {fileID: 2960485479888265117, guid: 285822cbdf98cd946b8a22228871daad, type: 3}
       propertyPath: m_Name
       value: LaserDoorExit

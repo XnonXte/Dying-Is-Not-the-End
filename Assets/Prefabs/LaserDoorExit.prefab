@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f20a5729576b54f98b1e4458c268c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Exit
-  sceneToLoad: 
+  sceneToLoad: Level3
 --- !u!1001 &4704158352588180667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7520244755478188838, guid: 0b0f305a527ca9c4f8e8d5a31b3fac5c, type: 3}
       propertyPath: m_Name
-      value: LaserDoorExit Variant
+      value: LaserDoorExit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
