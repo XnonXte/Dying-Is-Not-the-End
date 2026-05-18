@@ -19,4 +19,4 @@ public class MenuCameraLoop : MonoBehaviour
             transform.position = pos;
         }
     }
-}
+} 
