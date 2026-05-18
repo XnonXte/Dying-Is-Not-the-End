@@ -8,9 +8,9 @@ public class LevelButton : MonoBehaviour
     public string sceneName;
 
     [Header("Sprites")]
-    public Sprite lockedSprite;
-    public Sprite unplayedSprite;
-    public Sprite completedSprite;
+    public Sprite lockedSprite;      // uncomplete / locked
+    public Sprite unplayedSprite;    // unlocked (belum dimainkan)
+    public Sprite completedSprite;   // complete (sudah selesai)
 
     private Image image;
     private Button button;
@@ -25,6 +25,12 @@ public class LevelButton : MonoBehaviour
         button.onClick.AddListener(PlayLevel);
     }
 
+    void OnEnable()
+    {
+        // Refresh setiap kali button di-enable (kembali dari level)
+        Refresh();
+    }
+
     void Refresh()
     {
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
@@ -32,7 +38,7 @@ public class LevelButton : MonoBehaviour
         bool isUnlocked = levelIndex <= unlockedLevel;
         bool isCompleted = PlayerPrefs.GetInt("LevelCompleted_" + levelIndex, 0) == 1;
 
-        // LOCKED
+        // LOCKED / UNCOMPLETE
         if (!isUnlocked)
         {
             image.sprite = lockedSprite;
@@ -44,7 +50,7 @@ public class LevelButton : MonoBehaviour
             image.sprite = completedSprite;
             button.interactable = true;
         }
-        // UNPLAYED
+        // UNLOCKED - NOT COMPLETED / UNPLAYED
         else
         {
             image.sprite = unplayedSprite;
