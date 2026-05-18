@@ -264,10 +264,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.12739563, y: -0.50144815}
-      - {x: -0.38634497, y: -0.5103401}
-      - {x: -0.6081328, y: -0.7539901}
-      - {x: 1.0298458, y: -0.75212294}
-      - {x: 0.8075266, y: -0.50313133}
+      - {x: -0.32225233, y: -0.5028871}
+      - {x: -0.5230536, y: -0.6844449}
+      - {x: -0.60009193, y: -0.75484216}
+      - {x: 0.9919783, y: -0.7595603}
+      - {x: 0.70122147, y: -0.50112003}
   m_UseDelaunayMesh: 1
 --- !u!1 &4857060118843034150
 GameObject:
@@ -359,7 +360,7 @@ GameObject:
   - component: {fileID: 4788262960845252189}
   - component: {fileID: 8191120273451630151}
   - component: {fileID: 3445953478668207552}
-  - component: {fileID: 8508899706774415682}
+  - component: {fileID: 7779527800206546374}
   m_Layer: 3
   m_Name: Plate
   m_TagString: Untagged
@@ -487,7 +488,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &8508899706774415682
+--- !u!60 &7779527800206546374
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -533,12 +534,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.43177223, y: -0.3178022}
-      - {x: -0.5902033, y: -0.52076805}
-      - {x: -0.49456882, y: -0.5217216}
-      - {x: 0.49094868, y: -0.5199114}
-      - {x: 0.5792322, y: -0.517908}
-      - {x: 0.43893242, y: -0.3135066}
+    - - {x: -0.4375, y: -0.4375}
+      - {x: -0.5, y: -0.5}
+      - {x: -0.4741335, y: -0.50172436}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.4375, y: -0.4375}
   m_UseDelaunayMesh: 1
 --- !u!1 &6263804344511867635
 GameObject:
