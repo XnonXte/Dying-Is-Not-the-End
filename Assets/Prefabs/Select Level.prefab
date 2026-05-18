@@ -138,6 +138,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &1942215155866498707
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +278,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &2255420522392373854
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,6 +292,7 @@ GameObject:
   - component: {fileID: 798530242883012608}
   - component: {fileID: 7349952147579187972}
   - component: {fileID: 8409337415100666765}
+  - component: {fileID: 5484844165864356153}
   m_Layer: 5
   m_Name: Select Level
   m_TagString: Untagged
@@ -389,6 +394,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &5484844165864356153
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255420522392373854}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2356288678821104871
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +544,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &5084426188222763923
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +684,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &6286110628821789215
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,6 +824,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &7758058272890072327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1039,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &9065286626090354257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1179,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &9096780472144607655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1319,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &9140760787761605243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,6 +1459,8 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
 --- !u!1 &9205704855118672442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,3 +1599,5 @@ MonoBehaviour:
   lockedSprite: {fileID: -2063599871419689551, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   unplayedSprite: {fileID: -8920346746470224371, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
   completedSprite: {fileID: 4343147371690142880, guid: b5f5d6c719a157044aeb5199455ac72d, type: 3}
+  fadePanel: {fileID: 0}
+  fadeDuration: 3
