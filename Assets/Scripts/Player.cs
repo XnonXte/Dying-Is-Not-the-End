@@ -172,7 +172,6 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("Laser"))
         {
-            Debug.Log("palyer mati");
             TimeLoop();
         }
     }

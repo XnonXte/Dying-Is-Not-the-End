@@ -4,10 +4,12 @@ public class LaserReceiver : MonoBehaviour
 {
     public bool isPowered { get; private set; }
 
+    [Header("Visual")]
     public SpriteRenderer visual;
 
-    public Color offColor = Color.red;
-    public Color onColor = Color.green;
+    [Header("Sprites")]
+    public Sprite offSprite;
+    public Sprite onSprite;
 
     void Start()
     {
@@ -22,9 +24,8 @@ public class LaserReceiver : MonoBehaviour
 
     void UpdateVisual()
     {
-        if (visual != null)
-        {
-            visual.color = isPowered ? onColor : offColor;
-        }
+        if (visual == null) return;
+
+        visual.sprite = isPowered ? onSprite : offSprite;
     }
 }

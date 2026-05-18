@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8750709045988560407}
   - component: {fileID: 8853924388993069692}
   m_Layer: 0
-  m_Name: Laser Receiver
+  m_Name: LaserReciever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.61, y: 3.78, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -9158461699317646364, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.3406216, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.31875682, y: 0.76086974}
   m_EdgeRadius: 0
 --- !u!114 &8853924388993069692
 MonoBehaviour:
@@ -152,5 +152,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserReceiver
   visual: {fileID: 7088760090988263067}
-  offColor: {r: 1, g: 0, b: 0, a: 1}
-  onColor: {r: 0, g: 1, b: 0, a: 1}
+  offSprite: {fileID: -9158461699317646364, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}
+  onSprite: {fileID: 9107523837278136210, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}

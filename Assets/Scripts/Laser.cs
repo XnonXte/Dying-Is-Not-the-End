@@ -54,8 +54,6 @@ public class Laser : MonoBehaviour
         {
             endPoint = hit.point;
 
-            Debug.Log("Laser kena: " + hit.collider.name);
-
             // =========================
             // PLAYER HIT
             // =========================
