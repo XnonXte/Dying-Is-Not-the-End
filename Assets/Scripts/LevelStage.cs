@@ -14,13 +14,17 @@ public class LevelButton : MonoBehaviour
 
     private Image image;
     private UnityEngine.UI.Button button;
+    void Awake()
+    {
+        // Ambil component lebih awal
+        image = GetComponent<Image>();
+        button = GetComponent<UnityEngine.UI.Button>();
+    }
 
     void Start()
     {
-        image = GetComponent<Image>();
-        button = GetComponent<UnityEngine.UI.Button>();
-
         Refresh();
+
         button.onClick.AddListener(PlayLevel);
     }
 
@@ -31,21 +35,29 @@ public class LevelButton : MonoBehaviour
 
     void Refresh()
     {
+        // Cegah null error
+        if (image == null || button == null)
+            return;
+
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
 
         bool isUnlocked = levelIndex <= unlockedLevel;
-        bool isCompleted = PlayerPrefs.GetInt("LevelCompleted_" + levelIndex, 0) == 1;
+        bool isCompleted =
+            PlayerPrefs.GetInt("LevelCompleted_" + levelIndex, 0) == 1;
 
+        // LOCKED
         if (!isUnlocked)
         {
             image.sprite = lockedSprite;
             button.interactable = false;
         }
+        // COMPLETED
         else if (isCompleted)
         {
             image.sprite = completedSprite;
             button.interactable = true;
         }
+        // UNPLAYED
         else
         {
             image.sprite = unplayedSprite;
