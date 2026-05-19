@@ -1,31 +1,22 @@
 fileFormatVersion: 2
-guid: 67aa50edc6e9e8748b08b8fe9bb4f4dd
+guid: 12278e71ee67d1e4691c7b865728da37
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8255987125285390623
-    second: ui game_0
+      213: 8994907184762078727
+    second: Player-Push_0
   - first:
-      213: -5280311805264594855
-    second: ui game_1
+      213: -58494914258799198
+    second: Player-Push_1
   - first:
-      213: 3717248801269402587
-    second: ui game_2
+      213: -7019592145462856175
+    second: Player-Push_2
   - first:
-      213: -2364196130011746261
-    second: ui game_3
+      213: 1711736973234609346
+    second: Player-Push_3
   - first:
-      213: 8570547827543029313
-    second: ui game_4
-  - first:
-      213: -6060345865834138083
-    second: ui game_5
-  - first:
-      213: -6298330204027708441
-    second: ui game_6
-  - first:
-      213: 1703259754603599058
-    second: ui game_7
+      213: -2827671068029108884
+    second: Player-Push_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,162 +108,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui game_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 159
-        width: 33
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f1985d06c88239270800000000000000
-      internalID: 8255987125285390623
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui game_1
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 159
-        width: 33
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 958f6efa36098b6b0800000000000000
-      internalID: -5280311805264594855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui game_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 95
-        width: 33
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bdbc8650712569330800000000000000
-      internalID: 3717248801269402587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui game_3
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 95
-        width: 33
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b20fb435520b03fd0800000000000000
-      internalID: -2364196130011746261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui game_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 47
-        width: 33
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 146b23727d3b0f670800000000000000
-      internalID: 8570547827543029313
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui game_5
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 47
-        width: 33
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d16f2fa4b8355eba0800000000000000
-      internalID: -6060345865834138083
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ui game_6
+      name: Player-Push_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 33
+        width: 17
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,20 +127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7eb90d6ac06d798a0800000000000000
-      internalID: -6298330204027708441
+      spriteID: 7064a5f6d6454dc70800000000000000
+      internalID: 8994907184762078727
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui game_7
+      name: Player-Push_1
       rect:
         serializedVersion: 2
-        x: 63
+        x: 17
         y: 0
-        width: 33
-        height: 33
+        width: 32
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,8 +149,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d4dd59f8b133a710800000000000000
-      internalID: 1703259754603599058
+      spriteID: 2a5ff667f2f203ff0800000000000000
+      internalID: -58494914258799198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Push_2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11670959226659e90800000000000000
+      internalID: -7019592145462856175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Push_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cc1d8e35bf41c710800000000000000
+      internalID: 1711736973234609346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player-Push_4
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 0
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6db970352812c8d0800000000000000
+      internalID: -2827671068029108884
       vertices: []
       indices: 
       edges: []
@@ -323,14 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui game_0: 8255987125285390623
-      ui game_1: -5280311805264594855
-      ui game_2: 3717248801269402587
-      ui game_3: -2364196130011746261
-      ui game_4: 8570547827543029313
-      ui game_5: -6060345865834138083
-      ui game_6: -6298330204027708441
-      ui game_7: 1703259754603599058
+      Player-Push_0: 8994907184762078727
+      Player-Push_1: -58494914258799198
+      Player-Push_2: -7019592145462856175
+      Player-Push_3: 1711736973234609346
+      Player-Push_4: -2827671068029108884
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

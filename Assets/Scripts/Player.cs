@@ -116,12 +116,6 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-
-        if (timerStarted)
-        {
-            bool isPressingE = Keyboard.current.eKey.isPressed;
-            recordedFrames.Add(new FrameData(transform.position, isPressingE));
-        }
     }
 
     public void TimeLoop()

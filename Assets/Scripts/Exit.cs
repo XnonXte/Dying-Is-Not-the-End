@@ -28,6 +28,12 @@ public class Exit : MonoBehaviour
             // Simpan data
             PlayerPrefs.Save();
 
+            // Jika ke MainMenu, buka langsung Select Level
+            if (sceneToLoad == "MainMenu")
+            {
+                PlayButton.openSelectLevelOnMainMenu = true;
+            }
+
             // Pindah scene
             SceneManager.LoadScene(sceneToLoad);
         }
