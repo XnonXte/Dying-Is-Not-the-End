@@ -11911,6 +11911,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1076108139871365852, guid: a61a5e016eecac34d9300067f7dc2576, type: 3}
+      propertyPath: maxClone
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076108139871365852, guid: a61a5e016eecac34d9300067f7dc2576, type: 3}
       propertyPath: cloneDisplay
       value: 
       objectReference: {fileID: 2404870826334583172}
