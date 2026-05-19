@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Collections;
+
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     private bool timerStarted = false;
 
     private bool hasSpawnedFirstClone = false;
+    private bool isLooping = false;
 
     private Platform[] movingPlatforms;
     private Button[] pedestalButtons;
@@ -37,16 +39,19 @@ public class Player : MonoBehaviour
     private List<FrameData> recordedFrames = new List<FrameData>();
 
     private Transform spawnPoint;
-    private Laser laser;
+
     public Animator animation;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         movingPlatforms = FindObjectsByType<Platform>();
         pedestalButtons = FindObjectsByType<Button>();
 
         timer = loopDuration;
+
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
 
         if (hasSpawnedFirstClone)
@@ -67,13 +72,13 @@ public class Player : MonoBehaviour
             timerDisplay.text = "Self Destruct: " + Mathf.Max(0, (int)timer);
         }
 
-        // === Clone Display (clone count / clone limit) ===
         if (cloneDisplay != null)
         {
             cloneDisplay.text = clones.Count + " / " + maxClone;
         }
 
-        if (Keyboard.current.rKey.wasPressedThisFrame && isGrounded && timerStarted)
+        if (Keyboard.current.rKey.wasPressedThisFrame && isGrounded && timerStarted && rb.linearVelocity.x == 0)
+
         {
             TimeLoop();
         }
@@ -92,7 +97,17 @@ public class Player : MonoBehaviour
             bool isJump = animation != null && animation.GetBool("isJump");
             bool isFall = animation != null && animation.GetBool("isfall");
             bool facingLeft = spriteRenderer != null && spriteRenderer.flipX;
-            recordedFrames.Add(new FrameData(transform.position, isPressingE, isRunning, isJump, isFall, facingLeft));
+
+            recordedFrames.Add(
+                new FrameData(
+                    transform.position,
+                    isPressingE,
+                    isRunning,
+                    isJump,
+                    isFall,
+                    facingLeft
+                )
+            );
         }
     }
 
@@ -104,15 +119,14 @@ public class Player : MonoBehaviour
         {
             horizontal = -1;
             timerStarted = true;
-            GetComponent<SpriteRenderer>().flipX = true;
-            
+            spriteRenderer.flipX = true;
         }
+
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
             horizontal = 1;
             timerStarted = true;
-            GetComponent<SpriteRenderer>().flipX = false;
-
+            spriteRenderer.flipX = false;
         }
 
         rb.linearVelocity = new Vector2(horizontal * walkingSpeed, rb.linearVelocity.y);
@@ -120,45 +134,71 @@ public class Player : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
             timerStarted = true;
-            animation.SetBool("isJump" ,true);
-                    
 
-            StartCoroutine(Delay());
+            animation.SetBool("isJump", true);
 
-            IEnumerator Delay()
-            {
-                yield return new WaitForSeconds(0.4f);
-                animation.SetBool("isJump", false);
-                animation.SetBool("isfall", true);
-            }
-
-           
+            StartCoroutine(JumpDelay());
         }
-        
-            
-        if(isGrounded){
+
+        if (isGrounded)
+        {
             animation.SetBool("isfall", false);
         }
 
-        if(horizontal != 0){
+        if (horizontal != 0)
+        {
             animation.SetBool("isRunning", true);
-        }else{
+        }
+        else
+        {
             animation.SetBool("isRunning", false);
         }
     }
 
+    IEnumerator JumpDelay()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        animation.SetBool("isJump", false);
+        animation.SetBool("isfall", true);
+    }
+
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            0.2f,
+            groundLayer
+        );
     }
 
     public void TimeLoop()
     {
+        if (isLooping) return;
+
+        isLooping = true;
 
 
-        GameObject clone = Instantiate(clonePrefab, spawnPoint.position, Quaternion.identity);
+
+
+         animation.SetTrigger("Die");
+
+        StartCoroutine(ResetDelay());
+    
+
+        IEnumerator ResetDelay()
+        {
+            yield return new WaitForSeconds(0.5f);  
+        GameObject clone = Instantiate(
+            clonePrefab,
+            spawnPoint.position,
+            Quaternion.identity
+        );
+
         CloneReplay replay = clone.GetComponent<CloneReplay>();
+
         replay.frames = new List<FrameData>(recordedFrames);
 
         clones.Enqueue(clone);
@@ -171,11 +211,15 @@ public class Player : MonoBehaviour
         hasSpawnedFirstClone = true;
 
         ResetPlayerState();
+        }
     }
 
     private void ResetPlayerState()
     {
+       
+
         transform.position = spawnPoint.position;
+
         rb.linearVelocity = Vector2.zero;
 
         foreach (Platform platform in movingPlatforms)
@@ -189,21 +233,25 @@ public class Player : MonoBehaviour
         }
 
         recordedFrames.Clear();
+
         timer = loopDuration;
 
         if (!hasSpawnedFirstClone)
         {
             timerStarted = false;
         }
+
+        isLooping = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Damage") || collision.gameObject.CompareTag("Laser"))
+        if (
+            collision.gameObject.CompareTag("Damage") ||
+            collision.gameObject.CompareTag("Laser")
+        )
         {
             TimeLoop();
         }
-
-        
     }
 }

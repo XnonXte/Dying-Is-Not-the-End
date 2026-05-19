@@ -8,7 +8,7 @@ public class Exit : MonoBehaviour
 
     [Header("Scene")]
     public string sceneToLoad;
-
+    public GameObject levelCompleteUI;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -28,14 +28,15 @@ public class Exit : MonoBehaviour
             // Simpan data
             PlayerPrefs.Save();
 
-            // Jika ke MainMenu, buka langsung Select Level
-            if (sceneToLoad == "MainMenu")
+            // Tampilkan UI level complete
+            if (levelCompleteUI != null)
             {
-                PlayButton.openSelectLevelOnMainMenu = true;
+                levelCompleteUI.SetActive(true);
             }
 
             // Pindah scene
-            SceneManager.LoadScene(sceneToLoad);
+            Time.timeScale = 0f; // Freeze game
+            levelCompleteUI.SetActive(true);
         }
     }
 }
