@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8279676305830411145}
   - component: {fileID: 7088760090988263067}
-  - component: {fileID: 8750709045988560407}
   - component: {fileID: 8853924388993069692}
+  - component: {fileID: 7137864744795333390}
   m_Layer: 0
   m_Name: LaserReciever
   m_TagString: Untagged
@@ -93,7 +93,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &8750709045988560407
+--- !u!114 &8853924388993069692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662732844912256631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9560ba9ae2c44b489d591b74c23a49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserReceiver
+  visual: {fileID: 7088760090988263067}
+  offSprite: {fileID: -9158461699317646364, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}
+  onSprite: {fileID: 9107523837278136210, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}
+--- !u!61 &7137864744795333390
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +142,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.3406216, y: 0}
+  m_Offset: {x: -0.34083962, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,20 +152,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.31875682, y: 0.76086974}
+  m_Size: {x: 0.31832075, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8853924388993069692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6662732844912256631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9560ba9ae2c44b489d591b74c23a49e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LaserReceiver
-  visual: {fileID: 7088760090988263067}
-  offSprite: {fileID: -9158461699317646364, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}
-  onSprite: {fileID: 9107523837278136210, guid: 9fe9c7ee7268d194a81549a97b4852d5, type: 3}
