@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     private Transform spawnPoint;
     private Laser laser;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
 
         if (timerDisplay != null)
         {
-            timerDisplay.text = "Self Destruct: " + Mathf.Max(0, (int)timer);
+            timerDisplay.text = "SELF DESTRUCT: " + Mathf.Max(0, (int)timer);
         }
 
         // === Clone Display (clone count / clone limit) ===
@@ -93,12 +94,12 @@ public class Player : MonoBehaviour
     {
         float horizontal = 0;
 
-        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.aKey.isPressed)
         {
             horizontal = -1;
             timerStarted = true;
         }
-        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+        if (Keyboard.current.dKey.isPressed)
         {
             horizontal = 1;
             timerStarted = true;
@@ -175,6 +176,6 @@ public class Player : MonoBehaviour
             TimeLoop();
         }
 
-        
+
     }
 }
