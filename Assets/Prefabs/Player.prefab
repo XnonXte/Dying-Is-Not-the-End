@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1076108139871365852}
   - component: {fileID: 6898059838462097757}
   - component: {fileID: 5811874480130804558}
+  - component: {fileID: 5390879456161960929}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -138,16 +139,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7516d7d38e00ee941bac125599943c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  walkingSpeed: 8
-  jumpForce: 12
+  maxSpeed: 7.5
+  acceleration: 85
+  deceleration: 110
+  jumpForce: 11
+  coyoteTime: 0.1
+  jumpBufferTime: 0.1
   groundCheck: {fileID: 1492519929221203860}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  groundCheckRadius: 0.2
   loopDuration: 20
   timerDisplay: {fileID: 0}
   clonePrefab: {fileID: 6740908766091924767, guid: 1d32924574b71d44aa057be9eaac1c9f, type: 3}
-  maxClone: 1
+  maxClone: 2
   cloneDisplay: {fileID: 0}
 --- !u!50 &6898059838462097757
 Rigidbody2D:
@@ -213,3 +219,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.028587818}
   m_Size: {x: 1, y: 1.7527006}
   m_Direction: 0
+--- !u!95 &5390879456161960929
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259892701714522693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4bc761b28bef1042842f8705251a995, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
