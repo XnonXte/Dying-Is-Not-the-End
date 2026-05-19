@@ -6,16 +6,16 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
-    public float maxSpeed = 8f;
-    public float acceleration = 70f;
-    public float deceleration = 90f;
+    public float maxSpeed = 7.5f;
+    public float acceleration = 85f;
+    public float deceleration = 110f;
 
     [Header("Jump")]
-    public float jumpForce = 12f;
+    public float jumpForce = 11f;
 
     [Header("Coyote Time + Buffer")]
-    public float coyoteTime = 0.12f;
-    public float jumpBufferTime = 0.12f;
+    public float coyoteTime = 0.1f;
+    public float jumpBufferTime = 0.1f;
 
     private float coyoteTimer;
     private float jumpBufferTimer;
