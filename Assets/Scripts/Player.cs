@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-
+using System.Collections;
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI cloneDisplay;
 
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private bool isGrounded;
     private float timer;
     private bool timerStarted = false;
@@ -37,9 +38,11 @@ public class Player : MonoBehaviour
 
     private Transform spawnPoint;
     private Laser laser;
+    public Animator animation;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         movingPlatforms = FindObjectsByType<Platform>();
         pedestalButtons = FindObjectsByType<Button>();
 
@@ -85,7 +88,11 @@ public class Player : MonoBehaviour
         if (timerStarted)
         {
             bool isPressingE = Keyboard.current.eKey.isPressed;
-            recordedFrames.Add(new FrameData(transform.position, isPressingE));
+            bool isRunning = animation != null && animation.GetBool("isRunning");
+            bool isJump = animation != null && animation.GetBool("isJump");
+            bool isFall = animation != null && animation.GetBool("isfall");
+            bool facingLeft = spriteRenderer != null && spriteRenderer.flipX;
+            recordedFrames.Add(new FrameData(transform.position, isPressingE, isRunning, isJump, isFall, facingLeft));
         }
     }
 
@@ -97,11 +104,15 @@ public class Player : MonoBehaviour
         {
             horizontal = -1;
             timerStarted = true;
+            GetComponent<SpriteRenderer>().flipX = true;
+            
         }
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
         {
             horizontal = 1;
             timerStarted = true;
+            GetComponent<SpriteRenderer>().flipX = false;
+
         }
 
         rb.linearVelocity = new Vector2(horizontal * walkingSpeed, rb.linearVelocity.y);
@@ -110,6 +121,30 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             timerStarted = true;
+            animation.SetBool("isJump" ,true);
+                    
+
+            StartCoroutine(Delay());
+
+            IEnumerator Delay()
+            {
+                yield return new WaitForSeconds(0.4f);
+                animation.SetBool("isJump", false);
+                animation.SetBool("isfall", true);
+            }
+
+           
+        }
+        
+            
+        if(isGrounded){
+            animation.SetBool("isfall", false);
+        }
+
+        if(horizontal != 0){
+            animation.SetBool("isRunning", true);
+        }else{
+            animation.SetBool("isRunning", false);
         }
     }
 

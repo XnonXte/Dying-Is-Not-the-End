@@ -6,11 +6,15 @@ public class CloneReplay : MonoBehaviour
     public List<FrameData> frames;
     private int currentFrame;
     private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private bool finished;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -35,9 +39,22 @@ public class CloneReplay : MonoBehaviour
             return;
         }
 
+        FrameData frame = frames[currentFrame];
+
         // Replay position
-        transform.position =
-            frames[currentFrame].position;
+        transform.position = frame.position;
+
+        if (animator != null)
+        {
+            animator.SetBool("isRunning", frame.isRunning);
+            animator.SetBool("isJump", frame.isJump);
+            animator.SetBool("isfall", frame.isFall);
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = frame.flipX;
+        }
 
         // Replay interactions
         if (frames[currentFrame].isInteracting)
