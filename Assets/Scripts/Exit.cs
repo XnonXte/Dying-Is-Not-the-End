@@ -3,26 +3,33 @@ using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
+    [Header("Level")]
+    public int currentLevel;
+
+    [Header("Scene")]
     public string sceneToLoad;
 
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-    }
-
-    void Update()
-    {
-
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
-            if (sceneToLoad != null)
+            // Tandai level selesai
+            PlayerPrefs.SetInt("LevelCompleted_" + currentLevel, 1);
+
+            // Ambil level terakhir yang terbuka
+            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+
+            // Unlock level berikutnya
+            if (currentLevel >= unlockedLevel)
             {
-                SceneManager.LoadScene(sceneToLoad);
+                PlayerPrefs.SetInt("UnlockedLevel", currentLevel + 1);
             }
+
+            // Simpan data
+            PlayerPrefs.Save();
+
+            // Pindah scene
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 }

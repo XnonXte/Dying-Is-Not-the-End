@@ -80,15 +80,24 @@ public class StageManager : MonoBehaviour
         // Trigger any completion effects here
         // Contoh: play sound, show UI, pause game briefly, etc.
         Time.timeScale = 0f; // Pause game
-        
+
         // Show completion UI after delay
-        Invoke("GoBackToMenu", 2f);
+        Invoke("LoadNextScene", 2f);
     }
 
-    void GoBackToMenu()
+    void LoadNextScene()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     public bool GetIsDone()

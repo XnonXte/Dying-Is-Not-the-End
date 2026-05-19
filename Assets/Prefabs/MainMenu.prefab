@@ -251,8 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283e8f4ab1b882c4580dad05ac6d9f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  normalScale: {x: 1, y: 1, z: 1}
-  hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  normalScale: {x: 2, y: 2, z: 1}
+  hoverScale: {x: 2.5, y: 2.5, z: 1.1}
   speed: 10
 --- !u!1 &5000529383181065277
 GameObject:
@@ -399,8 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283e8f4ab1b882c4580dad05ac6d9f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  normalScale: {x: 1, y: 1, z: 1}
-  hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  normalScale: {x: 2, y: 2, z: 1}
+  hoverScale: {x: 2.5, y: 2.5, z: 1.1}
   speed: 10
 --- !u!1 &6433889399836843421
 GameObject:
@@ -535,6 +535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283e8f4ab1b882c4580dad05ac6d9f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  normalScale: {x: 1, y: 1, z: 1}
-  hoverScale: {x: 1.1, y: 1.1, z: 1.1}
+  normalScale: {x: 2, y: 2, z: 1}
+  hoverScale: {x: 2.5, y: 2.5, z: 1.1}
   speed: 10
