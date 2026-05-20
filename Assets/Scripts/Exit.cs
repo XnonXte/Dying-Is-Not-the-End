@@ -9,6 +9,7 @@ public class Exit : MonoBehaviour
     [Header("Scene")]
     public string sceneToLoad;
     public GameObject levelCompleteUI;
+    public GameObject UIGamePlay;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -28,15 +29,17 @@ public class Exit : MonoBehaviour
             // Simpan data
             PlayerPrefs.Save();
 
-            // Tampilkan UI level complete
+            // Tampilkan UI level complet   e
             if (levelCompleteUI != null)
             {
+                UIGamePlay.SetActive(false);
                 levelCompleteUI.SetActive(true);
-            }
 
+            }
+            Time.timeScale = 0f;
             // Pindah scene
-            Time.timeScale = 0f; // Freeze game
-            levelCompleteUI.SetActive(true);
+            // Freeze game
+
         }
     }
 }
