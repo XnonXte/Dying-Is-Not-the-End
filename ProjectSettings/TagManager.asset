@@ -7,7 +7,6 @@ TagManager:
   - Damage
   - SpawnPoint
   - Clone
-  - Box
   - Laser
   layers:
   - Default

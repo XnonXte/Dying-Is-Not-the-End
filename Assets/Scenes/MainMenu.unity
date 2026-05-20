@@ -18595,7 +18595,7 @@ PrefabInstance:
       value: "Designed and Directed by\r\nMohammad Abdul Quddus Salam (xnonxte)\r\n\r\nGameplay
         Programmer\r\nJohannes Sebastian Tampubolon (aka0502)\r\n\r\nArt \r\nRajwa
         Sultan Faezhar (sultanz_)\r\n\r\nCharacter Art and Animation\r\nSabriel Rafif
-        Gunawan (@gunsclone)\n\nThank you for playing our game!"
+        Gunawan (gunsclone)\n\nThank you for playing our game!"
       objectReference: {fileID: 0}
     - target: {fileID: 6654898408657077941, guid: 95cd4db2371fb39449bed3b9338a3776, type: 3}
       propertyPath: m_fontSize

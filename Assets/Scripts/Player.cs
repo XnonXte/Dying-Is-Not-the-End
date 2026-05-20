@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
 
     private Platform[] movingPlatforms;
     private Button[] pedestalButtons;
-    private Cube[] cubes;
 
     private Queue<GameObject> clones = new Queue<GameObject>();
     private List<FrameData> recordedFrames = new List<FrameData>();
@@ -56,7 +55,6 @@ public class Player : MonoBehaviour
 
         movingPlatforms = FindObjectsByType<Platform>();
         pedestalButtons = FindObjectsByType<Button>();
-        cubes = FindObjectsByType<Cube>();
 
         timer = loopDuration;
 
@@ -217,11 +215,6 @@ public class Player : MonoBehaviour
         foreach (Button button in pedestalButtons)
         {
             button.Unpress();
-        }
-
-        foreach (Cube cube in cubes)
-        {
-            cube.ResetBoxPosition();
         }
 
         recordedFrames.Clear();
